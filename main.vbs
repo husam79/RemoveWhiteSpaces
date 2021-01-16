@@ -50,8 +50,12 @@ Private Function TrimExtraSpaces(data As String)
     
     data = Trim(data)
     
-    parts = SplitRemoveEmptyEntries(data, " ")
+    'The following statment is added by me to check whether the passing string is empty (exit immediatly) or not.
+    If data = "" Then
+        Exit Function
+    End If
     
+    parts = SplitRemoveEmptyEntries(data, " ")
     
     For i = 0 To UBound(parts)
         If parts(i) <> " " Or parts(i) <> "" Then
@@ -70,6 +74,11 @@ Private Function SplitRemoveEmptyEntries(strInput As String, strDelimiter As Str
     Dim sSplitOut() As String
     ReDim Preserve sSplitOut(0)
     
+    'The following statment is added by me to check whether the passing string is empty (exit immediatly) or not.
+    If strInput = "" Then
+        Exit Function
+    End If
+        
     For Each strTmp In Split(strInput, strDelimiter)
       If Trim(strTmp) <> "" Then
         ReDim Preserve sSplitOut(UBound(sSplitOut) + 1)
